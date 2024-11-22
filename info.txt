@@ -1,0 +1,21 @@
+para compilar e criar com o nome a.exe 
+
+C:\Users\23201049\Documents\t2_giordano\t2-giordano> 
+gcc main.c -I SDL2\i686-w64-mingw32\include -L SDL2\i686-w64-mingw32\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+
+
+
+para compilar e criar um novo nome de executável
+
+C:\Users\23201049\Documents\t2_giordano\t2-giordano> 
+gcc -o conecta4 main2.c -I SDL2\i686-w64-mingw32\include -L SDL2\i686-w64-mingw32\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+
+
+para executar
+
+C:\Users\23201049\Documents\t2_giordano\t2-giordano> 
+.\conecta4.exe
+
+
+
+Whatsapp: 51 999547152 (prof. Terroso)

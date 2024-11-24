@@ -177,14 +177,20 @@ int menu(SDL_Renderer* renderer){
 }
 
 // tela final, nada para dizer alem que foi chato fazer
-int tela_final(SDL_Renderer* renderer) {
+int tela_final(SDL_Renderer* renderer, int jogador) {
     SDL_Texture *fim = IMG_LoadTexture(renderer, "fim.png");
     SDL_Texture *retry = IMG_LoadTexture(renderer, "retry.png");
     SDL_Texture *quit = IMG_LoadTexture(renderer, "quit.png");
+    SDL_Texture *amarelo = IMG_LoadTexture(renderer, "amarelo.png");
+    SDL_Texture *vermelho = IMG_LoadTexture(renderer, "vermelho.png");
+    SDL_Texture *venceu = IMG_LoadTexture(renderer, "venceu.png");
 
     SDL_Rect rect_fim = {600, 200, 300, 130};
     SDL_Rect rect_retry = {600, 400, 300, 130};
     SDL_Rect rect_quit = {600, 600, 300, 130};
+    SDL_Rect rect_amarelo ={450, 80, 300, 130};
+    SDL_Rect rect_vermelho ={450, 80, 300, 130};
+    SDL_Rect rect_venceu ={750, 80, 300, 130};
 
     SDL_Event event;
     bool running = true;
@@ -194,6 +200,9 @@ int tela_final(SDL_Renderer* renderer) {
         SDL_RenderCopy(renderer, fim, NULL, &rect_fim);
         SDL_RenderCopy(renderer, retry, NULL, &rect_retry);
         SDL_RenderCopy(renderer, quit, NULL, &rect_quit);
+        SDL_RenderCopy(renderer, venceu, NULL, &rect_venceu);
+        if (jogador % 2 == 0) SDL_RenderCopy(renderer, amarelo, NULL, &rect_amarelo);
+        else SDL_RenderCopy(renderer, vermelho, NULL, &rect_vermelho);
         SDL_RenderPresent(renderer);
 
         while (SDL_PollEvent(&event)) {
@@ -293,7 +302,7 @@ void jogo(SDL_Renderer* renderer, int gamemode) {
                 if (verificarVitoria(tabuleiro_pecas, linha_destino, coluna_selecionada, jogador)) { // terminar o jogo se player venceu
                     printf("Jogador %d venceu!\n", jogador);
                     running = false;
-                    int escolha = tela_final(renderer);
+                    int escolha = tela_final(renderer, jogador);
                     if (escolha == 1) {
                         int gamemode = menu(renderer);
                         jogo(renderer, gamemode);
@@ -303,7 +312,7 @@ void jogo(SDL_Renderer* renderer, int gamemode) {
                 } else if (empate(tabuleiro_pecas)) { // terminar jogo se empate aconteceu
                     printf("Empate! O tabuleiro está cheio.\n");
                     running = false;
-                    int escolha = tela_final(renderer);
+                    int escolha = tela_final(renderer, jogador);
                     if (escolha == 1) {
                         int gamemode = menu(renderer);
                         jogo(renderer, gamemode);
